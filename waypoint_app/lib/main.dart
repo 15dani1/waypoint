@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'login_page.dart';
 import 'signup_page.dart';
+import 'home_page.dart';
+import 'package:waypoint_app/route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -14,7 +16,16 @@ void main() async {
 
   runApp(CupertinoApp(
     routes:{
-      '/': (context) => MyApp(),
+      '/': (context) => RoutePage(
+        playlistTitle: 'Sample Playlist',
+        playlistImagePath: 'https://picsum.photos/id/237/200/300',
+        songs: [
+          {'title': 'Song 1', 'artist': 'Artist 1', 'imagePath': 'https://picsum.photos/id/237/200/300'},
+          {'title': 'Song 2', 'artist': 'Artist 2', 'imagePath': 'https://picsum.photos/id/237/200/300'},
+          {'title': 'Song 3', 'artist': 'Artist 3', 'imagePath': 'https://picsum.photos/id/237/200/300'},
+        ],
+
+      ),
       '/signup': (context) => SignUpPage(),
       '/login': (context) => LoginPage(),
     },
