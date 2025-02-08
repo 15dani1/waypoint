@@ -1,4 +1,4 @@
-# waypoint
+# Waypoint
 
 A travel app that shares routes among users for local city exploration could be described as follows: "Waypoint: Your Local Adventure Companion". Waypoint is an innovative travel app that connects urban explorers with curated routes shared by local enthusiasts. The app offers a unique blend of community-driven content and smart technology to help users discover hidden gems and popular spots in their own cities or while traveling. Key features:
 
