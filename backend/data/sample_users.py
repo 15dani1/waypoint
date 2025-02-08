@@ -1,7 +1,7 @@
 sample_user1 = {
     'username': '15dani1',
     'name': 'Rahul Dani',
-    'password': 'rdani$123',
+    'password': 'test$123',
     'email': 'rdani@andrew.cmu.edu',
     'routes': ['Pittsburgh', 'NYC'],
     'history': ['Los Angeles', 'San Francisco'],
@@ -19,4 +19,8 @@ sample_user2 = {
     'saves': ['Chicago', 'Seattle'],
     'favorites': ['Miami', 'Boston']
 }
+
+all_users = [sample_user1, sample_user2]
+
+usernames = [user['username'] for user in all_users]
 
