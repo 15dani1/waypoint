@@ -79,7 +79,9 @@ class _RoutePageState extends State<RoutePage> {
               ),
             ),
             CupertinoButton(
-              child: Text(isMapView ? 'Show Playlist Image' : 'Show Map View'),
+              child: Text(isMapView ? 'Show Playlist Image' : 'Show Map View',
+                  style: TextStyle(fontSize: 16, color: CupertinoColors.black),
+              ),
               onPressed: () {
                 setState(() {
                   isMapView = !isMapView;
@@ -102,7 +104,7 @@ class _RoutePageState extends State<RoutePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'User Name', // Replace with actual user name
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: TextStyle(fontSize: 16, color: CupertinoColors.black),
                 ),
               ),
             ),

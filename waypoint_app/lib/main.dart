@@ -29,6 +29,20 @@ void main() async {
       '/signup': (context) => SignUpPage(),
       '/login': (context) => LoginPage(),
     },
+    theme: CupertinoThemeData(
+      brightness: Brightness.light,
+      primaryColor: Color(0xFFE5E5E5),
+      barBackgroundColor: Color(0xFFE5E5E5),
+      scaffoldBackgroundColor: Color(0xFFF0FBCE),
+      textTheme: CupertinoTextThemeData(
+       
+        primaryColor: Color(0xFF000000),
+        textStyle: TextStyle(
+           fontFamily: 'Arial',
+          color: Color(0xFF000000),
+        ),
+      ),
+    ),
   ));
 }
 

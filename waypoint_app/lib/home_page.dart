@@ -4,9 +4,14 @@ import 'login_page.dart';
 import 'search_page.dart';
 import 'library_page.dart';
 import 'route.dart';
-import 'package:http/http.dart' as http;
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final AuthService _authService = AuthService();
   static const testimg = 'https://picsum.photos/id/237/200/300';
   
@@ -48,6 +53,7 @@ class HomePage extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
+            activeIcon: Icon(CupertinoIcons.home, color: CupertinoColors.black), // Change color to black
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -55,11 +61,12 @@ class HomePage extends StatelessWidget {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.settings),
+            icon: Icon(CupertinoIcons.book),
             label: 'Library',
           ),
         ],
       ),
+      
       tabBuilder: (context, index) {
         switch (index) {
           case 0:
@@ -69,83 +76,140 @@ class HomePage extends StatelessWidget {
                   color: Color(0xFFF0FBCE),
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Let's Explore!"),
-                        SizedBox(height: 40),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text("Let's Explore!", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(height: 20),
                         // First Section
-                        Text("Recent Waypoints"),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text("Recent Waypoints", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(height: 10),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: routes.map((route) {
-                              return LocationItem(
-                                image: route['image'],
-                                locationName: route['title'],
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => RoutePage(
-                                        playlistTitle: route['title'],
-                                        playlistImagePath: route['image'],
-                                        songs: route['songs'],
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: LocationItem(
+                                  image: route['image'],
+                                  locationName: route['title'],
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                        builder: (context) => RoutePage(
+                                          playlistTitle: route['title'],
+                                          playlistImagePath: route['image'],
+                                          songs: route['songs'],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               );
                             }).toList(),
                           ),
                         ),
-                        SizedBox(height: 40),
-                        Text("Highlights"),
-                        Text("Attractions"),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: routes.map((route) {
-                              return LocationItem(
-                                image: route['image'],
-                                locationName: route['title'],
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => RoutePage(
-                                        playlistTitle: route['title'],
-                                        playlistImagePath: route['image'],
-                                        songs: route['songs'],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            }).toList(),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text("Highlights", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFD9EAA6),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                 Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Text("Attractions", style: TextStyle(fontSize: 16)),
+                                ),
+                                SizedBox(height: 10),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: routes.map((route) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: LocationItem(
+                                          image: route['image'],
+                                          locationName: route['title'],
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                builder: (context) => RoutePage(
+                                                  playlistTitle: route['title'],
+                                                  playlistImagePath: route['image'],
+                                                  songs: route['songs'],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        SizedBox(height: 40),
-                        Text("Restaurants"),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: routes.map((route) {
-                              return LocationItem(
-                                image: route['image'],
-                                locationName: route['title'],
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => RoutePage(
-                                        playlistTitle: route['title'],
-                                        playlistImagePath: route['image'],
-                                        songs: route['songs'],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            }).toList(),
+                        SizedBox(height: 20),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFD9EAA6),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: Text("Restaurants", style: TextStyle(fontSize: 16)),
+                                ),
+                                SizedBox(height: 10),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: routes.map((route) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: LocationItem(
+                                          image: route['image'],
+                                          locationName: route['title'],
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                builder: (context) => RoutePage(
+                                                  playlistTitle: route['title'],
+                                                  playlistImagePath: route['image'],
+                                                  songs: route['songs'],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -188,26 +252,23 @@ class LocationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: CupertinoButton(
-        padding: EdgeInsets.zero,
-        onPressed: onPressed,
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                image,
-                width: 150,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: onPressed,
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              image,
+              width: 150,
+              height: 150,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 8),
-            Text(locationName),
-          ],
-        ),
+          ),
+          const SizedBox(height: 8),
+           Text(locationName, style: TextStyle(color: Color(0xFF000000), fontSize: 16)),
+        ],
       ),
     );
   }

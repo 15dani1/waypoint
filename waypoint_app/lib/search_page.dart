@@ -7,53 +7,57 @@ import 'home_page.dart';
 
 class SearchPage extends StatelessWidget {
   @override
+  // load in recent searches
+  // when search, search database for routes (and add to recent searches)
+  // also generate routes 
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.book),
-            label: 'Library',
-          ),
-        ],
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => HomePage()),
-              );
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => SearchPage()),
-              );
-              break;
-            case 2:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => LibraryPage()),
-              );
-              break;
-            default:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => LoginPage()),
-              );
-          }
-        },
-      ),
-      tabBuilder: (BuildContext context, int index) {
-        return SafeArea(
+    // return CupertinoTabScaffold(
+    //   tabBar: CupertinoTabBar(
+    //     items: [
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.home),
+    //         label: 'Home',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.search),
+    //         label: 'Search',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.book),
+    //         label: 'Library',
+    //       ),
+    //     ],
+    //     onTap: (index) {
+    //       switch (index) {
+    //         case 0:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => HomePage()),
+    //           );
+    //           break;
+    //         case 1:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => SearchPage()),
+    //           );
+    //           break;
+    //         case 2:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => LibraryPage()),
+    //           );
+    //           break;
+    //         default:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => LoginPage()),
+    //           );
+    //       }
+    //     },
+    //   ),
+    //   tabBuilder: (BuildContext context, int index) {
+      return CupertinoPageScaffold(
+        child: SafeArea(
            child: Container(
           color: Color(0xFFF0FBCE),
           child: CupertinoScrollbar(
@@ -64,34 +68,35 @@ class SearchPage extends StatelessWidget {
                   padding: EdgeInsets.all(16.0),
                   child: Text('Your Playlists', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
-                _buildPlaylistItem('Chill Vibes', 'assets/playlist1.jpg'),
-                _buildPlaylistItem('Top Hits', 'assets/playlist2.jpg'),
-                _buildPlaylistItem('Workout', 'assets/playlist3.jpg'),
+                // _buildPlaylistItem('Chill Vibes', 'assets/playlist1.jpg'),
+                // _buildPlaylistItem('Top Hits', 'assets/playlist2.jpg'),
+                // _buildPlaylistItem('Workout', 'assets/playlist3.jpg'),
                 
                 // Section 2 - Recently Played
                 Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: Text('Recently Played', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text('Recent Searches', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
-                _buildPlaylistItem('Song 1', 'assets/song1.jpg'),
-                _buildPlaylistItem('Song 2', 'assets/song2.jpg'),
-                _buildPlaylistItem('Song 3', 'assets/song3.jpg'),
+                // _buildPlaylistItem('Song 1', 'assets/song1.jpg'),
+                // _buildPlaylistItem('Song 2', 'assets/song2.jpg'),
+                // _buildPlaylistItem('Song 3', 'assets/song3.jpg'),
 
-                // Section 3 - Albums
+                // Section 3 - Routes
                 Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: Text('Albums', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text('Routes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
-                _buildAlbumItem('Album 1', 'assets/album1.jpg'),
-                _buildAlbumItem('Album 2', 'assets/album2.jpg'),
-                _buildAlbumItem('Album 3', 'assets/album3.jpg'),
+                _buildRouteItem('Route 1', 'https://picsum.photos/id/237/200/300'),
+                _buildRouteItem('Route 2', 'https://picsum.photos/id/237/200/300'),
+                _buildRouteItem('Route 3', 'https://picsum.photos/id/237/200/300'),
               ],
             ),
           ),
            ),
-        );
-      },
-    );
+        ),
+      );
+      // },
+    // );
   }
 
   // Helper function to build a playlist item
@@ -113,13 +118,13 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  // Helper function to build an album item
-  Widget _buildAlbumItem(String name, String imagePath) {
+  // Helper function to build a route item
+  Widget _buildRouteItem(String name, String imagePath) {
     return CupertinoListTile(
       title: Text(name),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset(
+        child: Image.network(
           imagePath,
           width: 50,
           height: 50,
@@ -127,7 +132,7 @@ class SearchPage extends StatelessWidget {
         ),
       ),
       onTap: () {
-        // Navigate to album page or start playing
+        // Navigate to route page or start playing
       },
     );
   }

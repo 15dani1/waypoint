@@ -20,52 +20,54 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.book),
-            label: 'Library',
-          ),
-        ],
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => HomePage()),
-              );
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => SearchPage()),
-              );
-              break;
-            case 2:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => LibraryPage()),
-              );
-              break;
-            default:
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => LoginPage()),
-              );
-          }
-        },
-      ),
-      tabBuilder: (BuildContext context, int index) {
-        return SafeArea(
+    // return CupertinoTabScaffold(
+    //   tabBar: CupertinoTabBar(
+    //     items: [
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.home),
+    //         label: 'Home',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.search),
+    //         label: 'Search',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(CupertinoIcons.book),
+    //         label: 'Library',
+    //       ),
+    //     ],
+    //     onTap: (index) {
+    //       switch (index) {
+    //         case 0:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => HomePage()),
+    //           );
+    //           break;
+    //         case 1:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => SearchPage()),
+    //           );
+    //           break;
+    //         case 2:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => LibraryPage()),
+    //           );
+    //           break;
+    //         default:
+    //           Navigator.push(
+    //             context,
+    //             CupertinoPageRoute(builder: (context) => LoginPage()),
+    //           );
+    //       }
+    //     },
+    //   ),
+    //   tabBuilder: (BuildContext context, int index) {
+        return CupertinoPageScaffold(
+          
+        child: SafeArea(
           child: Container(
             color: Color(0xFFF0FBCE),
             child: CupertinoScrollbar(
@@ -107,10 +109,10 @@ class LibraryPage extends StatelessWidget {
               ),
             ),
           ),
+        ),
         );
-      },
-    );
   }
+  
 
   // Helper function to build a route item
   Widget _buildRouteItem(String title, String imagePath) {
