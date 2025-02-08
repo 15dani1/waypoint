@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293003921094",
+    "project_id": "waypoints-c2e77",
+    "storage_bucket": "waypoints-c2e77.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293003921094:android:35b6314991ce4d08de39c7",
+        "android_client_info": {
+          "package_name": "com.example.waypoint_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn-WABo7SKgSw0eGxLCqi9X5vtiLd7teY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
